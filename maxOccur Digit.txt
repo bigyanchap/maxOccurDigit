@@ -1,0 +1,43 @@
+package maxOccurDigit;
+/*Q:Write a function named maxOccurDigit that returns the digit that 
+ * occur the most. If there is no such digit, it will return -1. 
+ * For example maxOccurDigit(327277) would return 7 because 7 occurs
+ * three times in the number and all other digits occur less than three
+ * times. Other examples: maxOccurDigit(33331) returns 3
+ * maxOccurDigit(3232, 6) returns -1 maxOccurDigit(5) returns 5
+ * maxOccurDigit(-9895) returns 9 */
+public class MaxOccurDigit {
+	public static void main(String[] args) {
+		System.out.println(maxOccurDigit(737272));
+	}
+	
+	private static int maxOccurDigit(int n){
+		if(n<0)n=n*(-1);
+		if(n%10==n)return n;
+		int count=0;
+		int max=1;
+		int maxOccur=0;
+		int digit=0;
+		boolean noMax=false;
+		while(n>0){
+			digit=n%10;
+			count=countTheDigit(digit,n);
+			n/=10;
+			if(count>max){
+				max=count;
+				noMax=false;
+				maxOccur=digit;
+			}else if(count==max)noMax=true;
+		}
+		if(noMax)return -1;
+		return maxOccur;
+	}
+	private static int countTheDigit(int dig, int m) {
+		int count=0;
+		while(m>0){
+			if(m%10==dig)count++;
+			m/=10;
+		}
+		return count;
+	}
+}
